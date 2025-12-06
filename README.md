@@ -73,7 +73,9 @@ Library
   - `findByAuthor(authorName)`, `findByTitle(titlePart)`
 
   - `to_string()` — обобщена информация (брой книги, членове, активни заеми)
-
+    
+ 
+https://github.com/ValentinaTepavicharova/Homework_oppC-/blob/main/Screenshot%202025-12-06%20175321.png
  ## Автор
  Име: Valentina
  Номер: 22105 
