@@ -7,6 +7,7 @@
 - [Бърз преглед](#бърз-преглед)
 - [Подробно описание на класовете](#подробно-описание-на-класовете)
 - [Бележки](#бележки)
+- [Автор](#автор)
 
 ---
 
@@ -15,15 +16,12 @@
 Примерна команда (Windows, TDM-GCC / g++) — стартирайте в Command Prompt или PowerShell:
 
 ```bash
-D:\TDM-GCC-64\bin\g++.exe -Wall -Wextra -g3 \
-c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\main.cpp \
--o c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\output\main.exe
+ valcheto@LAPTOP-H5DOK5TQ:/mnt/c/Users/valka/Desktop/oop c++/Library$  g++ main.cpp -o program
+valcheto@LAPTOP-H5DOK5TQ:/mnt/c/Users/valka/Desktop/oop c++/Library$ ./program
+ 
 ```
 
-Съвети:
-- -Wall -Wextra показват допълнителни предупреждения.
-- -g3 включва информация за дебъг.
-- Изпълнимият файл ще е: c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\output\main.exe
+  
 
 ---
 
@@ -77,4 +75,7 @@ Library
   - `to_string()` — обобщена информация (брой книги, членове, активни заеми)
 
  ## Автор
- Име: Valentina Номер: 22105 Курс: Обектно-ориентирано програмиране (C++) Дата: 6.12.2025
+ Име: Valentina
+ Номер: 22105 
+ Курс: Обектно-ориентирано програмиране (C++) 
+ Дата: 6.12.2025
