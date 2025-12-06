@@ -1,138 +1,80 @@
- # Мини Библиотечна Система на C++
+ # Мини Библиотечна система на C++
 
-Учебен проект на C++ — библиотека с книги, автори, читатели и заеми.  
-Проектът демонстрира обектно-ориентирано програмиране (OOP) чрез класове `Author`, `Book`, `Member`, `Loan` и `Library`.
-
----
+Документация за учебен проект на C++ — библиотека с книги, автори, читатели и заеми.
 
 ## Съдържание
-- [Структура на проекта](#структура-на-проекта)
-- [Компилация и изпълнение](#компилация-и-изпълнение)
+- [Компилация](#компилация)
 - [Бърз преглед](#бърз-преглед)
 - [Подробно описание на класовете](#подробно-описание-на-класовете)
 - [Бележки](#бележки)
-- [Примерна визуализация](#примерна-визуализация)
-- [Автор](#автор)
 
 ---
 
-## Структура на проекта
-library/
-├── Author.h
-├── Book.h
-├── Member.h
-├── Loan.h
-├── Library.h
-├── main.cpp
-└── README.md
+## Компилация
 
----
-
-## Компилация и изпълнение
-
-Отворете терминал в директорията на проекта и изпълнете:
+Примерна команда (Windows, TDM-GCC / g++) — стартирайте в Command Prompt или PowerShell:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra main.cpp -o main
-./main
-Бърз преглед
+D:\TDM-GCC-64\bin\g++.exe -Wall -Wextra -g3 \
+c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\main.cpp \
+-o c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\output\main.exe
+```
+
+Съвети:
+- -Wall -Wextra показват допълнителни предупреждения.
+- -g3 включва информация за дебъг.
+- Изпълнимият файл ще е: c:\Users\PC_LENOVO\PycharmProjects\4kurs\c++_lections\homework_OOP_lections\output\main.exe
+
+---
+
+## Бърз преглед
 
 Проектът съдържа следните компоненти:
+- Author — представя автор (име, година).
+- Book — книга: заглавие, автор, година, цена, ISBN; следи общ брой създадени книги.
+- Member — читател: име, ID, година на присъединяване.
+- Loan — заем: ISBN, memberId, начална и крайна дата, статус върната/не.
+- Library — управлява колекции и операции: добавяне, заемане, връщане и търсене.
 
-Author — представя автор (име, година)
+---
 
-Book — книга: заглавие, автор, година, цена, ISBN; следи общ брой създадени книги
+## Подробно описание на класовете
 
-Member — читател: име, ID, година на присъединяване
-
-Loan — заем: ISBN, memberId, начална и крайна дата, статус върната/не
-
-Library — управлява колекции и операции: добавяне, заемане, връщане и търсене
-
-Подробно описание на класовете
 Author
-
-Полета: std::string name, int birthYear
-
-Конструктори: по подразбиране и с параметри
-
-Валидация: setBirthYear(int) приема 1850–2025
-
-Методи: getName(), getBirthYear(), setBirthYear(), to_string()
+- Полета: `std::string name`, `int birthYear`
+- Конструктори: по подразбиране и с параметри.
+- Валидация: `setBirthYear(int)` приема 1850–2025.
+- Методи: `getName()`, `getBirthYear()`, `setBirthYear()`, `to_string()`.
 
 Book
-
-Полета: title, author (Author), year, price, isbn, static int totalBooks
-
-Валидация: година в [1500,2025]; цена >= 0
-
-Поддържа Rule of 5 и проследява totalBooks
-
-Методи: гетъри/сетъри, to_string(), getTotalBooks()
+- Полета: `title`, `author` (Author), `year`, `price`, `isbn`, `static int totalBooks`
+- Валидация: година в [1500,2025]; цена >= 0.
+- Поддържа Rule of 5; проследява `totalBooks`.
+- Методи: гетъри/сетъри, `to_string()`, `getTotalBooks()`.
 
 Member
-
-Полета: name, memberId, yearJoined
-
-Валиден член: memberId не е празен
-
-Методи: гетъри, bool valid()
+- Полета: `name`, `memberId`, `yearJoined`
+- Валиден член: `memberId` не е празен.
+- Методи: гетъри и `bool valid()`.
 
 Loan
-
-Полета: isbn, memberId, startDate, dueDate, returned
-
-Формат на датите: YYYY-MM-DD
-
-Конструктор валидира: празни полета или due < start хвърля std::invalid_argument
-
-Методи: markReturned(), isReturned(), isOverdue(today), to_string()
+- Полета: `isbn`, `memberId`, `startDate`, `dueDate`, `returned`
+- Формат на датите: `YYYY-MM-DD` (лексикографско сравнение работи правилно).
+- Конструктор валидира: празни полета или due < start хвърлят `std::invalid_argument`.
+- Методи: `markReturned()`, `isReturned()`, `isOverdue(today)`, `to_string()`.
 
 Library
+- Полета: вектори `books`, `members`, `loans`
+- Основни операции:
+  - `addBook(const Book&)` — добавя, ако ISBN липсва
+  - `addMember(const Member&)` — добавя валиден член
+  - `hasBook`, `hasMember`
+  - `isBookAvailable(isbn)` — налична ако съществува и няма активен заем
+  - `loanBook(isbn, memberId, start, due)` — създава Loan (върща false при грешка)
+  - `returnBook(isbn, memberId)` — маркира заем като върнат
+  - `findByAuthor(authorName)`, `findByTitle(titlePart)`
 
-Полета: вектори books, members, loans
+  - `to_string()` — обобщена информация (брой книги, членове, активни заеми)
 
-Основни операции:
-
-addBook(const Book&) — добавя, ако ISBN липсва
-
-addMember(const Member&) — добавя валиден член
-
-hasBook(isbn), hasMember(memberId)
-
-isBookAvailable(isbn) — налична ако съществува и няма активен заем
-
-loanBook(isbn, memberId, start, due) — създава Loan (връща false при грешка)
-
-returnBook(isbn, memberId) — маркира заем като върнат
-
-findByAuthor(authorName), findByTitle(titlePart)
-
-to_string() — обобщена информация (брой книги, членове, активни заеми)
-
-Бележки
-
-Проектът демонстрира:
-
-Разделение между интерфейс (.h) и имплементация (.cpp)
-
-Използване на списъци за инициализация
-
-Работа със статични членове
-
-Приложение на const-коректност
-
-Обработка на изключения
-
-Примерна визуализация:
-
-<img width="916" height="485" alt="Screenshot 2025-12-06 175321" src="https://github.com/user-attachments/assets/8b44e431-60bd-47b2-8fe0-69bb6998307a" />
-##Автор
-
-Име: Valentina
-
-Номер: 22105
-
-Курс: Обектно-ориентирано програмиране (C++)
-
-Дата: 6.12.2025
+ ## Автор
+ Име: Valentina Номер: 22105 Курс: Обектно-ориентирано програмиране (C++) Дата: 6.12.2025
